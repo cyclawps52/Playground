@@ -48,19 +48,20 @@ sys.stdout.write('\rGot scoreboard!                 ')
 #begin infinite loop for refresh
 while True:
     #print status
-    #os.system('cls')
-    for i in range(1,1000):
-        sys.stdout.write('\b')
-    sys.stdout.write('REFRESHING NOW!               ')
-
+    sys.stdout.write('\rREFRESHING NOW!               ')
+    
     #define columns
-    winners = scoreboard.col_values(2) #column by ID (starts at index 1)
+    winners = scoreboard.col_values(2)  # column by ID (starts at index 1)
     sys.stdout.write('\rGot winners column!         ')
     duration = scoreboard.col_values(3)
     sys.stdout.write('\rGot duration column!        ')
     timeSinceLast = scoreboard.col_values(4)
     sys.stdout.write('\rGot time difference column! ')
 
+    for x in winners:
+        for i in range(1,1000):
+            sys.stdout.write('\b')
+    
     del winners[0] #deletes entry from dictionary and updates any dictionaries linked (starts at index 0)
     sys.stdout.write('\rDeleted header row!         ')
 
@@ -76,6 +77,6 @@ while True:
     #countdown display
     for i in range(1,refreshRate):
         secondsLeft = refreshRate - i  
-        sys.stdout.write('\rRefreshing in %3d seconds' % secondsLeft)
+        sys.stdout.write('\rRefreshing in %3d seconds              ' % secondsLeft)
         sys.stdout.flush()
         time.sleep(1)
